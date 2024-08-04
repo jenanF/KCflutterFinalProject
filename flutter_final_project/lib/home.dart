@@ -5,8 +5,17 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String name = "jenan";
+    Color color = Colors.pink;
     return  Scaffold(
-      body: Center(child: Text("hello"),),
+      body: Center(
+        child: Column(children: [
+          Container(child: Row(children: [
+            Text("Hello $name",
+            style: TextStyle(color: color),)
+
+          ],),)
+        ],)),
     );
   }
 }

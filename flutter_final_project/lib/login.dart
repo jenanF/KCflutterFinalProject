@@ -5,6 +5,7 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color color = Colors.pink;
     return  Scaffold(
       backgroundColor: Color.fromARGB(245, 255, 255, 255),
       body: Center(
@@ -15,7 +16,7 @@ class LoginPage extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 28,top: 80, bottom: 35),
                 child: Container(alignment: Alignment.topLeft,
                   child: Icon(Icons.arrow_back_ios_new_sharp,
-                  color: Colors.pink,
+                  color: color,
                   size: 50,),
                 ),
               ),
@@ -30,10 +31,10 @@ class LoginPage extends StatelessWidget {
                     hintText: "Enter your email",
                     hintStyle: TextStyle(fontSize: 11),
                     labelText: "Email",
-                    prefixIcon: Icon(Icons.email, color: Colors.pink,),
+                    prefixIcon: Icon(Icons.email, color: color,),
                     border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
-                    borderSide: BorderSide(color: Colors.pink)
+                    borderSide: BorderSide(color: color)
                   ),
                   )
                 ),
@@ -45,25 +46,27 @@ class LoginPage extends StatelessWidget {
                     hintText: "Enter your password",
                     hintStyle: TextStyle(fontSize: 11),
                     labelText: "Password",
-                    focusColor: Colors.pink ,
-                    prefixIcon: Icon(Icons.lock_outline, color: Colors.pink,),
+                    focusColor: color ,
+                    prefixIcon: Icon(Icons.lock_outline, color: color,),
                     border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                     
-                    borderSide: BorderSide(color: Colors.pink),
+                    borderSide: BorderSide(color: color),
                   ),
                   )
                 ),
               ),
               SizedBox(height: 17,),
-              ElevatedButton(onPressed: (){}, 
-              child: Text("login",
-              style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w400),),
-               style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.pink,
-              ),),
+              Transform.scale(scale: 1.3,
+                child: ElevatedButton(onPressed: (){}, 
+                child: Text("Login",
+                style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w600),),
+                 style: ElevatedButton.styleFrom(
+                    backgroundColor: color,
+                ),),
+              ),
               SizedBox(height: 10,),
               Row(mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -74,9 +77,9 @@ class LoginPage extends StatelessWidget {
                   TextButton(onPressed: (){}, 
                   child: Text("Sign up",
                   style: TextStyle(
-                    color: Colors.pink,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 16,
+                    color: color,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 13,
                   ),))
                 ],
               ),

@@ -11,6 +11,7 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
+    Color color = Colors.pink;
     return  Scaffold(
       backgroundColor: Color.fromARGB(245, 255, 255, 255),
       body: Center(
@@ -20,7 +21,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               Spacer(),
               Text("Welcome To",
               style: TextStyle(
-                color: Colors.pink,
+                color: color,
                 fontSize: 38,
                 fontWeight: FontWeight.w500
               ),),
@@ -45,7 +46,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 padding: const EdgeInsets.only(right: 28,bottom: 70),
                 child: Container(alignment: Alignment.bottomRight,
                   child: Icon(Icons.arrow_forward_ios_sharp,
-                  color: Colors.pink,
+                  color: color,
                   size: 50,),
                 ),
               )
@@ -60,7 +61,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   child: Text("Be \nProductive",
                   textAlign: TextAlign.left,
                   style: TextStyle(
-                    color: Colors.pink,
+                    color: color,
                     fontSize: 40,
                     fontWeight: FontWeight.w700
                   ),),
@@ -83,7 +84,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 padding: const EdgeInsets.only(right: 28,bottom: 70),
                 child: Container(alignment: Alignment.bottomRight,
                   child: Icon(Icons.arrow_forward_ios_sharp,
-                  color: Colors.pink,
+                  color: color,
                   size: 50,),
                 ),
               )
@@ -97,7 +98,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   child: Text("Be \nHealthy",
                   textAlign: TextAlign.left,
                   style: TextStyle(
-                    color: Colors.pink,
+                    color: color,
                     fontSize: 40,
                     fontWeight: FontWeight.w700
                   ),),
@@ -120,7 +121,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 padding: const EdgeInsets.only(right: 28,bottom: 70),
                 child: Container(alignment: Alignment.bottomRight,
                   child: Icon(Icons.arrow_forward_ios_sharp,
-                  color: Colors.pink,
+                  color: color,
                   size: 50,),
                 ),
               )
@@ -132,7 +133,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 padding: const EdgeInsets.only(left: 50, right: 50),
                 child: Text("Time Manegmet",
                 style: TextStyle(
-                  color: Colors.pink,
+                  color: color,
                   fontSize: 40,
                   fontWeight: FontWeight.w700,
                   
@@ -163,7 +164,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     }));
                   },
                   style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.pink,
+                  backgroundColor: color,
                   fixedSize: Size(140, 45)
                   ),
                   child: Text("get started",
