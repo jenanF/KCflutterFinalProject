@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+// ignore: unused_import
 import 'package:flutter_final_project/splash.dart';
+import 'package:flutter_final_project/welcome.dart';
 
 void main() {
   runApp(const MainApp());
@@ -18,7 +20,7 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Splash()
+      home: WelcomeScreen()
     );
   }
 }
