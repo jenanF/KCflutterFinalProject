@@ -33,11 +33,14 @@ class _HomePageState extends State<HomePage> {
     return  Scaffold(
       appBar: AppBar(
       backgroundColor: Colors.black,
-      flexibleSpace: Image.asset(
-          'assets/images/white.png', 
-
-          fit: BoxFit.cover,
-        ),),
+      toolbarHeight: 60,
+       flexibleSpace: Center(
+        child: Image.asset(
+            'assets/images/white.png', 
+             width: 70,
+            height: 70,
+          ),
+      ),),
       body: Center(
         child: Column(children: [
           Padding(
