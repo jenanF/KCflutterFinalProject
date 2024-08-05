@@ -17,6 +17,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
    DateTime today = DateTime.now();
+   double progress = 0.75;
 
   @override
 
@@ -26,8 +27,10 @@ class _HomePageState extends State<HomePage> {
     Color color = Colors.pink;
     Color icons_color = Colors.white;
     double icon_size = 35;
+    double task_icon_size = 30;
 
     return  Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
       backgroundColor: Colors.black,
       toolbarHeight: 60,
@@ -38,40 +41,117 @@ class _HomePageState extends State<HomePage> {
             height: 70,
           ),
       ),),
-      body: Center(
-        child: Column(children: [
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Center(
+          child: Column(children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+              child: Container(child: Row(children: [
+                Text("Hello $name..",
+                style: TextStyle(
+                  color: color,
+                  fontSize: 30,
+                  fontWeight: FontWeight.w800),),
+        
+                  Spacer(),
+        
+                  Stack(
+                    children:[ IconButton(onPressed: (){}, 
+                    icon: Icon(Icons.bolt_sharp,color: color,size: 30,)),
+                    Icon(Icons.circle_outlined, size: 45,color: color,)
+              ]),
+              
+              ],),),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 30, top: 5),
+              child: Container(
+                alignment: Alignment.topLeft,
+                child: Text( DateFormat('EEEE, d MMM yyyy').format(today),
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500
+                ),)),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(height: 1,color: Colors.grey,),
+            ),
+            Container(alignment: Alignment.topLeft,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 15, top: 7),
+                child: Text("keep going!"),
+              )),
+            Stack(
+        alignment: Alignment.center,
+        children: [
           Padding(
-            padding: const EdgeInsets.all(20),
-            child: Container(child: Row(children: [
-              Text("Hello $name..",
-              style: TextStyle(
-                color: color,
-                fontSize: 30,
-                fontWeight: FontWeight.w800),),
+            padding: const EdgeInsets.only(left:8.0, right: 8, top: 4),
+            child: LinearProgressIndicator(
+              value: progress,
+              minHeight: 26,
+              color: color,
+              borderRadius: BorderRadius.circular(30),
+              backgroundColor: Colors.grey[300],),
+          ),
+          Text(
+            '${(progress * 100).toStringAsFixed(0)}%',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),),
+        ],),
 
-                Spacer(),
-
-                Stack(
-                  children:[ IconButton(onPressed: (){}, 
-                  icon: Icon(Icons.bolt_sharp,color: color,size: 30,)),
-                  Icon(Icons.circle_outlined, size: 45,color: color,)
-            ]),
+         Padding(
+           padding: const EdgeInsets.only(top: 35, left: 12, right: 12),
+           child: Container(
+            padding: EdgeInsets.all(15),
+            child: Row(children: [
+              Icon(Icons.run_circle, size: task_icon_size + 5,),
+              SizedBox(width: 12,),
+              Text("Task", style: TextStyle(fontSize: 23, fontWeight: FontWeight.w400),),
+              Spacer(),
+              Icon(Icons.check_box, size: task_icon_size,)
+            ],),
+            height: 90,
+            width: 400,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(14),
+              border: Border.all(
+              color: color,
+              width: 3,
+        ),), ),
+         )
             
-            ],),),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 30, top: 0),
-            child: Container(
-              alignment: Alignment.topLeft,
-              child: Text( DateFormat('EEEE, d MMM yyyy').format(today),
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.w500
-              ),)),
-          ),
-          
-           ]
-        )),
+             ]
+          )),
+      ),
     );
   }
 }
+
+ Widget buildSection(String title, double progress) {
+    return Container(
+      padding: EdgeInsets.only(top: 16.0, bottom: 16, right: 20, left: 220),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            child: Text(
+              title,
+              style:TextStyle(fontWeight: FontWeight.bold),),
+          ),
+          LinearProgressIndicator(
+            value: progress,
+            minHeight: 14,
+            borderRadius: BorderRadius.circular(50),
+             // Adjust height as needed
+          ),
+          Container(color: Colors.deepPurpleAccent,height: 100,width: 150,)
+          // Add checkboxes or other content here
+          
+        ],
+      ),
+    );
+  }
