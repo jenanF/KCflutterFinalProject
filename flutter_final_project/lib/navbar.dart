@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter_final_project/calender.dart';
-import 'package:flutter_final_project/categories.dart';
+import 'package:flutter_final_project/progress.dart';
 import 'package:flutter_final_project/home.dart';
 import 'package:flutter_final_project/profile.dart';
 class Navbar extends StatefulWidget {
@@ -17,7 +17,7 @@ class _NavbarState extends State<Navbar> {
 
     PageController _pageController = PageController();
   List<Widget> _screens = [
-    HomePage(), ProggressScreen(), CalendarScreen(),ProfileScreen()
+    HomePage(), ProgressScreen(), CalendarScreen(),ProfileScreen()
   ];
 
   int _selectedIndex = 0;

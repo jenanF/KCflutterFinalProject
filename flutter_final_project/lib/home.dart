@@ -1,8 +1,9 @@
 // ignore_for_file: unused_import, unused_local_variable
 
 import 'package:flutter/material.dart';
-
-import 'package:flutter_final_project/categories.dart';
+import 'dart:convert';
+import 'package:intl/intl.dart';
+import 'package:flutter_final_project/progress.dart';
 import 'package:flutter_final_project/profile.dart';
 
 
@@ -15,17 +16,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-    
-  
-
+   DateTime today = DateTime.now();
 
   @override
 
   Widget build(BuildContext context) {
 
-    
-
-    String name = "jenan";
+    String name = "name";
     Color color = Colors.pink;
     Color icons_color = Colors.white;
     double icon_size = 35;
@@ -62,6 +59,17 @@ class _HomePageState extends State<HomePage> {
             
             ],),),
           ),
+          Padding(
+            padding: const EdgeInsets.only(left: 30, top: 0),
+            child: Container(
+              alignment: Alignment.topLeft,
+              child: Text( DateFormat('EEEE, d MMM yyyy').format(today),
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.w500
+              ),)),
+          ),
+          
            ]
         )),
     );
