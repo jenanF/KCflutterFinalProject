@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
-class CategoriesScreen extends StatelessWidget {
-  const CategoriesScreen({super.key});
+class ProggressScreen extends StatelessWidget {
+  const ProggressScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold();
+    return  Scaffold(
+      body: Center(child: Text("category")),
+    );
   }
 }

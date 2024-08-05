@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+// ignore: unused_import
 import 'package:flutter_final_project/home.dart';
+import 'package:flutter_final_project/navbar.dart';
 // ignore: unused_import
 import 'package:flutter_final_project/splash.dart';
 // ignore: unused_import
@@ -22,7 +24,7 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage()
+      home: Navbar()
     );
   }
 }
