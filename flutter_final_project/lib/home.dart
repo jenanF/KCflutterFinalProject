@@ -1,10 +1,12 @@
 // ignore_for_file: unused_import, unused_local_variable
 
 import 'package:flutter/material.dart';
+import 'package:flutter_final_project/models/cards_habits.dart';
 import 'dart:convert';
 import 'package:intl/intl.dart';
 import 'package:flutter_final_project/progress.dart';
 import 'package:flutter_final_project/profile.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -19,6 +21,7 @@ class _HomePageState extends State<HomePage> {
    DateTime today = DateTime.now();
    double progress = 0.75;
 
+   
   @override
 
   Widget build(BuildContext context) {
@@ -103,26 +106,79 @@ class _HomePageState extends State<HomePage> {
             ),),
         ],),
 
-         Padding(
-           padding: const EdgeInsets.only(top: 35, left: 12, right: 12),
-           child: Container(
-            padding: EdgeInsets.all(15),
-            child: Row(children: [
-              Icon(Icons.run_circle, size: task_icon_size + 5,),
-              SizedBox(width: 12,),
-              Text("Task", style: TextStyle(fontSize: 23, fontWeight: FontWeight.w400),),
-              Spacer(),
-              Icon(Icons.check_box, size: task_icon_size,)
-            ],),
-            height: 90,
-            width: 400,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(14),
-              border: Border.all(
-              color: color,
-              width: 3,
-        ),), ),
+        Padding(
+          padding: const EdgeInsets.only(top: 1),
+          child: Stack(
+            children:[SizedBox( height: 530,
+              child: ListView.builder( itemCount: 7,itemBuilder: (context, index){
+                return  CardsHabits(onTap: (){}, 
+              settings: (){}, timeSpent: 200 , timeGoal: 10, habitStarted: true, habit: "Task",);
+              }),
+            ),
+            Padding(
+           padding: const EdgeInsets.only(top:470 ,right: 26),
+           child: Container(alignment: Alignment.bottomRight,
+             child: Transform.scale( scale: 1.6,
+               child: ElevatedButton(onPressed: (){}, child: Text("+", style: TextStyle(color: Colors.white, fontSize: 20),),
+                style: ElevatedButton.styleFrom(
+                          backgroundColor: color,
+                          shape: CircleBorder()
+                      ),),
+             ),
+           ),
          )
+          ]),
+        )
+
+       
+
+        //  Padding(
+        //    padding: const EdgeInsets.only(top: 35, left: 12, right: 12),
+        //    child: Container(
+        //     padding: EdgeInsets.all(15),
+        //     child: Row(children: [
+        //       Stack( alignment: Alignment.center,
+        //         children: [ CircularPercentIndicator(
+        //           radius: 25,
+        //           percent: 0.6,
+        //           progressColor: color,
+        //         ),
+        //         Icon(Icons.play_arrow, color: Colors.black,)]
+        //       ),
+        //       SizedBox(width: 12,),
+        //       Column( 
+        //         children: [
+        //           Text("Task", style: TextStyle(fontSize: 23, fontWeight: FontWeight.w400),),
+        //           Text("2:00 / 10 = 20%")
+        //         ],
+        //       ),
+        //       Spacer(),
+        //       Icon(Icons.check_box, size: task_icon_size, color: color,),
+        //       SizedBox(width: 10,),
+        //       Icon(Icons.settings, size: task_icon_size, color: Colors.black,),
+        //     ],),
+        //     height: 90,
+        //     width: 400,
+        //     decoration: BoxDecoration(
+        //       borderRadius: BorderRadius.circular(14),
+        //       border: Border.all(
+        //       color: Colors.black,
+        //       width: 3,
+        // ),), ),
+        //  ),
+         
+        // , Padding(
+        //    padding: const EdgeInsets.only(right: 20),
+        //    child: Container(alignment: Alignment.bottomRight,
+        //      child: Transform.scale( scale: 1.6,
+        //        child: ElevatedButton(onPressed: (){}, child: Text("+", style: TextStyle(color: Colors.white, fontSize: 20),),
+        //         style: ElevatedButton.styleFrom(
+        //                   backgroundColor: color,
+        //                   shape: CircleBorder()
+        //               ),),
+        //      ),
+        //    ),
+        //  )
             
              ]
           )),
