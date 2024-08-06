@@ -239,27 +239,30 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
- Widget buildSection(String title, double progress) {
-    return Container(
-      padding: EdgeInsets.only(top: 16.0, bottom: 16, right: 20, left: 220),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            child: Text(
-              title,
-              style:TextStyle(fontWeight: FontWeight.bold),),
-          ),
-          LinearProgressIndicator(
-            value: progress,
-            minHeight: 14,
-            borderRadius: BorderRadius.circular(50),
-             // Adjust height as needed
-          ),
-          Container(color: Colors.deepPurpleAccent,height: 100,width: 150,)
-          // Add checkboxes or other content here
+
+
+
+//  Widget buildSection(String title, double progress) {
+//     return Container(
+//       padding: EdgeInsets.only(top: 16.0, bottom: 16, right: 20, left: 220),
+//       child: Column(
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         children: [
+//           Container(
+//             child: Text(
+//               title,
+//               style:TextStyle(fontWeight: FontWeight.bold),),
+//           ),
+//           LinearProgressIndicator(
+//             value: progress,
+//             minHeight: 14,
+//             borderRadius: BorderRadius.circular(50),
+//              // Adjust height as needed
+//           ),
+//           Container(color: Colors.deepPurpleAccent,height: 100,width: 150,)
+//           // Add checkboxes or other content here
           
-        ],
-      ),
-    );
-  }
+//         ],
+//       ),
+//     );
+//   }
