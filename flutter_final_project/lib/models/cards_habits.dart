@@ -20,6 +20,20 @@ class CardsHabits extends StatelessWidget {
     required this.timeGoal,
     required this.habitStarted,});
 
+    String TimerFormat(int Tseconds){
+      String sec = (Tseconds % 60).toString();
+      String min = (Tseconds / 60).toStringAsFixed(1);
+
+      if (sec.length == 1){
+        sec = '0' + sec;
+      }
+
+      if (min[1] == '.') {
+        min = min.substring(0, 1);
+      }
+      return min + ':' + sec;
+    }
+
   @override
   Widget build(BuildContext context) {
     Color color = Colors.pink;
@@ -46,7 +60,7 @@ class CardsHabits extends StatelessWidget {
               Column( 
                 children: [
                   Text(habit, style: TextStyle(fontSize: 23, fontWeight: FontWeight.w400),),
-                  Text(timeSpent.toString() + " / " + timeGoal.toString())
+                  Text(TimerFormat(timeSpent) + " / " + timeGoal.toString())
                 ],
               ),
               Spacer(),

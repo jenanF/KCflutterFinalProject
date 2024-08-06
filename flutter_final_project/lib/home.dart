@@ -5,6 +5,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_final_project/help.dart';
 import 'package:flutter_final_project/models/cards_habits.dart';
 import 'dart:convert';
 import 'package:intl/intl.dart';
@@ -34,24 +35,26 @@ class _HomePageState extends State<HomePage> {
     ["Homework", false, 2, 10]
    ];
 
-   void StartTimer(int index){
-    var begin = DateTime.now();
+   void TaskStarted(int index){
+    var startTime = DateTime.now();
+    int Etime = habits[index][2];
 
     setState(() {
       habits[index][1] = ! habits[index][1];
     });
-
-    
+    if(habits[index][1]){
     Timer.periodic(Duration(seconds: 1), (timer){
       setState(() {
         if(habits[index][1] == false){
           timer.cancel();
-        }else{
-          habits[index][2]++;
         }
+        var currentTime = DateTime.now();
+        habits[index][2] = Etime + currentTime.second - startTime.second + 
+         60 * (currentTime.minute - startTime.minute) +
+         60 * 60 * (currentTime.hour - startTime.hour);
       });
     });
-    
+    }
    }
 
   @override
@@ -92,11 +95,23 @@ class _HomePageState extends State<HomePage> {
           
                     Spacer(),
           
-                    Stack(
-                      children:[ IconButton(onPressed: (){}, 
-                      icon: Icon(Icons.bolt_sharp,color: color,size: 30,)),
-                      Icon(Icons.circle_outlined, size: 45,color: color,)
-                ]),
+                    InkWell(onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return HelpScreen();
+                    }));
+                  },
+                      child: Stack(
+                        children:[ IconButton(onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return HelpScreen();
+                      }));
+                                        },
+                        icon: Icon(Icons.bolt_sharp,color: color,size: 30,)),
+                        Icon(Icons.circle_outlined, size: 45,color: color,)
+                                      ]),
+                    ),
                 
                 ],),),
               ),
@@ -144,7 +159,7 @@ class _HomePageState extends State<HomePage> {
             child: Stack(
               children:[SizedBox( height: 507,
                 child: ListView.builder( itemCount: 4,itemBuilder: (context, index){
-                  return  CardsHabits(onTap: (){StartTimer(index);}, settings: (){},
+                  return  CardsHabits(onTap: (){TaskStarted(index);}, settings: (){},
                    timeSpent: habits[index][2], 
                    timeGoal: habits[index][3], 
                    habitStarted: habits[index][1], 
