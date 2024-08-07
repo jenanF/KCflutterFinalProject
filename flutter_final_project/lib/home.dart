@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
   List<Habit> habitsList = [
     Habit(
         isDone: false,
-        name: "Swimming",
+        name: "Homework",
         timeGoal: 10,
         timeSpent: 0,
         isPaused: false),
@@ -261,6 +261,8 @@ class _HomePageState extends State<HomePage> {
         });
   }
 
+  double counter = 0;
+
   void isChecked1(list, Habit habitObj) {
     var lastElementPosition = list.length - 1;
 
@@ -274,16 +276,15 @@ class _HomePageState extends State<HomePage> {
     }
     setState(() {
       habitObj.isDone = !habitObj.isDone;
+      if (habitObj.isDone == true) {
+        counter++;
+      } else {
+        counter--;
+      }
     });
 
     // var x = bool != habits[index][4];
     list = temp;
-  }
-
-  void percentUpdate(index) {
-    setState(() {
-      var i = habitsList[index].isDone;
-    });
   }
 
   @override
@@ -293,6 +294,7 @@ class _HomePageState extends State<HomePage> {
     Color icons_color = Colors.white;
     double icon_size = 35;
     double task_icon_size = 30;
+    double test = (counter / habitsList.length);
 
     return SafeArea(
       child: Scaffold(
@@ -384,7 +386,7 @@ class _HomePageState extends State<HomePage> {
                 Padding(
                   padding: const EdgeInsets.only(left: 8.0, right: 8, top: 4),
                   child: LinearProgressIndicator(
-                    value: progress,
+                    value: (counter / habitsList.length),
                     minHeight: 26,
                     color: color,
                     borderRadius: BorderRadius.circular(30),
@@ -392,7 +394,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 Text(
-                  '${(progress * 100).toStringAsFixed(0)}%',
+                  '${(test * 100).toStringAsFixed(0)}%',
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
