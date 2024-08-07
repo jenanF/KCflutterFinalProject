@@ -1,7 +1,4 @@
 // ignore_for_file: unused_local_variable, unused_import
-
-
-
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:flutter_final_project/home.dart';
@@ -25,13 +22,9 @@ class CardsHabits extends StatefulWidget {
 
   @override
   State<CardsHabits> createState() => _CardsHabitsState();
-
-}
-
+  }
 class _CardsHabitsState extends State<CardsHabits> {
   bool? isChecked = false;
-
-     
 
     String TimerFormat(int Tseconds){
       String sec = (Tseconds % 60).toString();
