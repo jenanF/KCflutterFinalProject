@@ -282,9 +282,7 @@ class _HomePageState extends State<HomePage> {
 
   void percentUpdate(index) {
     setState(() {
-      if (habits[index][4] == true) {
-        index / habits.length * 100;
-      }
+      var i = habitsList[index].isDone;
     });
   }
 
@@ -417,15 +415,15 @@ class _HomePageState extends State<HomePage> {
                           settings: () {
                             settingsTaped(index);
                           },
-                          timeSpent: habits[index][2],
-                          timeGoal: habits[index][3],
-                          habitStarted: habits[index][1],
-                          habit: habits[index][0],
+                          timeSpent: habitsList[index].timeSpent,
+                          timeGoal: habitsList[index].timeGoal,
+                          habitStarted: habitsList[index].isPaused,
+                          habit: habitsList[index].name,
                           Checked: () {
-                            isChecked1(habits[index], habitsList[0]);
+                            isChecked1(habits[index], habitsList[index]);
                           },
                           isChecked: check,
-                          habitObj: habitsList[0],
+                          habitObj: habitsList[index],
                         );
                       }),
                 ),
