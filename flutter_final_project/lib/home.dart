@@ -27,10 +27,11 @@ class _HomePageState extends State<HomePage> {
 
    DateTime today = DateTime.now();
    double progress = 0.75;
+   Duration selected_time = Duration(minutes: 0, seconds: 0);
 
    List habits = [
     // name , bool, time, goal
-    ["Reading", false, 2, 10],
+    ["Reading", false, 2, 3],
     ["Coding", false, 2, 4],
     ["Running", false, 2, 10],
     ["Homework", false, 2, 2]
@@ -58,7 +59,7 @@ class _HomePageState extends State<HomePage> {
     }
    }
 
-   Duration selected_time =Duration(minutes: 0, seconds: 0);
+   
 
    void settingsTaped(int index){
 
@@ -81,7 +82,12 @@ class _HomePageState extends State<HomePage> {
                 },),
             ),
             Transform.scale( scale: 0.8,
-              child: ElevatedButton(onPressed: (){}, style: ElevatedButton.styleFrom(
+              child: ElevatedButton(onPressed: (){
+                setState(() {
+                  habits[index][3] = selected_time.inMinutes;
+                  Navigator.of(context).pop();
+                });
+              }, style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
                     fixedSize: Size(140, 45)),
                     child: Text("Save", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600),),),
@@ -200,7 +206,8 @@ class _HomePageState extends State<HomePage> {
                    timeSpent: habits[index][2], 
                    timeGoal: habits[index][3], 
                    habitStarted: habits[index][1], 
-                   habit: habits[index][0],);
+                   habit: habits[index][0],
+                   );
                 }),
               ),
               Padding(

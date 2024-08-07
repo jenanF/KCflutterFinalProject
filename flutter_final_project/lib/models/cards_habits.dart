@@ -1,8 +1,10 @@
-// ignore_for_file: unused_local_variable
+// ignore_for_file: unused_local_variable, unused_import
+
+
 
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-class CardsHabits extends StatelessWidget {
+class CardsHabits extends StatefulWidget {
 
   final String habit;
   final VoidCallback onTap;
@@ -20,6 +22,16 @@ class CardsHabits extends StatelessWidget {
     required this.timeGoal,
     required this.habitStarted,});
 
+  @override
+  State<CardsHabits> createState() => _CardsHabitsState();
+
+}
+
+class _CardsHabitsState extends State<CardsHabits> {
+  bool? isChecked = false;
+
+     
+
     String TimerFormat(int Tseconds){
       String sec = (Tseconds % 60).toString();
       String min = (Tseconds / 60).toStringAsFixed(1);
@@ -35,7 +47,7 @@ class CardsHabits extends StatelessWidget {
     }
 
        double percentDone(){
-    return timeSpent / (timeGoal * 60);
+    return widget.timeSpent / (widget.timeGoal * 60);
    }
 
   @override
@@ -57,22 +69,29 @@ class CardsHabits extends StatelessWidget {
                   progressColor: color,
                 ),
                 GestureDetector(
-                  onTap: onTap
-                  ,child: Icon( habitStarted ? Icons.pause : Icons.play_arrow, color: Colors.black,))]
+                  onTap: widget.onTap
+                  ,child: Icon( widget.habitStarted ? Icons.pause : Icons.play_arrow, color: Colors.black,))]
               ),
               SizedBox(width: 12,),
               Column( 
                 children: [
-                  Text(habit, style: TextStyle(fontSize: 23, fontWeight: FontWeight.w400),),
-                  Text(TimerFormat(timeSpent) + " / " + timeGoal.toString() + 
+                  Text(widget.habit, style: TextStyle(fontSize: 23, fontWeight: FontWeight.w400),),
+                  Text(TimerFormat(widget.timeSpent) + " / " + widget.timeGoal.toString() + 
                     " = " + (percentDone() * 100).toStringAsFixed(0) + "%")
                 ],
               ),
               Spacer(),
-              Icon(Icons.check_box, size: task_icon_size, color: color,),
+              Checkbox(value: isChecked, 
+              activeColor: color,
+              onChanged: (newBool){
+                setState(() {
+                  isChecked = newBool; 
+                });
+              }),
+              
               SizedBox(width: 10,),
               GestureDetector(
-                onTap: settings
+                onTap: widget.settings
                 ,child: Icon(Icons.settings, size: task_icon_size, color: Colors.black,)),
             ],),
             height: 90,
