@@ -34,6 +34,10 @@ class CardsHabits extends StatelessWidget {
       return min + ':' + sec;
     }
 
+       double percentDone(){
+    return timeSpent / (timeGoal * 60);
+   }
+
   @override
   Widget build(BuildContext context) {
     Color color = Colors.pink;
@@ -49,7 +53,7 @@ class CardsHabits extends StatelessWidget {
               Stack( alignment: Alignment.center,
                 children: [ CircularPercentIndicator(
                   radius: 25,
-                  percent: 0.6,
+                  percent: percentDone(),
                   progressColor: color,
                 ),
                 GestureDetector(
@@ -60,7 +64,8 @@ class CardsHabits extends StatelessWidget {
               Column( 
                 children: [
                   Text(habit, style: TextStyle(fontSize: 23, fontWeight: FontWeight.w400),),
-                  Text(TimerFormat(timeSpent) + " / " + timeGoal.toString())
+                  Text(TimerFormat(timeSpent) + " / " + timeGoal.toString() + 
+                    " = " + (percentDone() * 100).toStringAsFixed(0) + "%")
                 ],
               ),
               Spacer(),

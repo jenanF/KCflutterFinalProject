@@ -12,6 +12,7 @@ import 'package:intl/intl.dart';
 import 'package:flutter_final_project/progress.dart';
 import 'package:flutter_final_project/profile.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:flutter/cupertino.dart';
 
 
 
@@ -30,9 +31,9 @@ class _HomePageState extends State<HomePage> {
    List habits = [
     // name , bool, time, goal
     ["Reading", false, 2, 10],
-    ["Coding", false, 2, 10],
+    ["Coding", false, 2, 4],
     ["Running", false, 2, 10],
-    ["Homework", false, 2, 10]
+    ["Homework", false, 2, 2]
    ];
 
    void TaskStarted(int index){
@@ -56,6 +57,42 @@ class _HomePageState extends State<HomePage> {
     });
     }
    }
+
+   Duration selected_time =Duration(minutes: 0, seconds: 0);
+
+   void settingsTaped(int index){
+
+    showDialog(context: context, builder: (context){
+      return AlertDialog(
+        title: Text("Set Timer for " + habits[index][0],
+        style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),),
+        content: Container(
+          height: 180,
+          width: 250,
+          child: Column(children: [
+            Expanded(
+              child: CupertinoTimerPicker(
+                mode: CupertinoTimerPickerMode.ms,
+                initialTimerDuration: selected_time,
+                onTimerDurationChanged: (Duration duration){
+                  setState(() {
+                    selected_time = duration;
+                  });
+                },),
+            ),
+            Transform.scale( scale: 0.8,
+              child: ElevatedButton(onPressed: (){}, style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.black,
+                    fixedSize: Size(140, 45)),
+                    child: Text("Save", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600),),),
+            )
+
+          ],),),);
+    });
+
+   }
+
+
 
   @override
 
@@ -159,7 +196,7 @@ class _HomePageState extends State<HomePage> {
             child: Stack(
               children:[SizedBox( height: 507,
                 child: ListView.builder( itemCount: 4,itemBuilder: (context, index){
-                  return  CardsHabits(onTap: (){TaskStarted(index);}, settings: (){},
+                  return  CardsHabits(onTap: (){TaskStarted(index);}, settings: (){settingsTaped(index);},
                    timeSpent: habits[index][2], 
                    timeGoal: habits[index][3], 
                    habitStarted: habits[index][1], 
