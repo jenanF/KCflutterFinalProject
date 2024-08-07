@@ -50,7 +50,7 @@ class _CardsHabitsState extends State<CardsHabits> {
   }
 
   double percentDone() {
-    return widget.timeSpent / (widget.timeGoal * 60);
+    return widget.habitObj.timeSpent / (widget.habitObj.timeGoal * 60);
   }
 
   @override

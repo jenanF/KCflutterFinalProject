@@ -39,7 +39,7 @@ class _HomePageState extends State<HomePage> {
         name: "Swimming",
         timeGoal: 10,
         timeSpent: 0,
-        isPaused: true)
+        isPaused: false)
   ];
 
   bool? check = false;
@@ -51,10 +51,10 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       habitsList[index].isPaused = !habitsList[index].isPaused;
     });
-    if (habits[index][1]) {
+    if (habitsList[index].isPaused == true) {
       Timer.periodic(Duration(seconds: 1), (timer) {
         setState(() {
-          if (habits[index][1] == false) {
+          if (habitsList[index].isPaused == false) {
             timer.cancel();
           }
           // else if(habits[index][2].minutes == habits[index][3]){
@@ -75,7 +75,13 @@ class _HomePageState extends State<HomePage> {
   final TaskController = TextEditingController();
 
   void addTask(String task) {
-    habits.add([task, false, 0, 10]);
+    // habits.add([task, false, 0, 10]);
+    habitsList.add(Habit(
+        isDone: false,
+        name: task,
+        timeGoal: 10,
+        timeSpent: 0,
+        isPaused: false));
   }
 
   void addTaskPop(BuildContext context) {
@@ -156,7 +162,7 @@ class _HomePageState extends State<HomePage> {
         builder: (context) {
           return AlertDialog(
             title: Text(
-              "Set Timer for " + habitsList[index].timeGoal.toString(),
+              "Set Timer for " + habitsList[index].name,
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
             ),
             content: Container(
@@ -208,7 +214,7 @@ class _HomePageState extends State<HomePage> {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
-                                    'Task ${habits[index][0]} was deleted',
+                                    'Task ${habitsList[index].name} was deleted',
                                     style:
                                         TextStyle(fontWeight: FontWeight.w800),
                                   ),
