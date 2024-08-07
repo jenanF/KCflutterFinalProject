@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:flutter_final_project/home.dart';
 class CardsHabits extends StatefulWidget {
 
   final String habit;
@@ -65,7 +66,7 @@ class _CardsHabitsState extends State<CardsHabits> {
               Stack( alignment: Alignment.center,
                 children: [ CircularPercentIndicator(
                   radius: 25,
-                  percent: percentDone(),
+                  percent: percentDone() < 1 ? percentDone() : 1,
                   progressColor: color,
                 ),
                 GestureDetector(

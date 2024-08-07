@@ -3,7 +3,6 @@
 //import 'dart:nativewrappers/_internal/vm/lib/internal_patch.dart';
 
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_final_project/help.dart';
 import 'package:flutter_final_project/models/cards_habits.dart';
@@ -49,7 +48,11 @@ class _HomePageState extends State<HomePage> {
       setState(() {
         if(habits[index][1] == false){
           timer.cancel();
-        }
+          }
+        // else if(habits[index][2].minutes == habits[index][3]){
+        //   habits[index][1] = false;
+        //   timer.cancel();
+        // }
         var currentTime = DateTime.now();
         habits[index][2] = Etime + currentTime.second - startTime.second + 
          60 * (currentTime.minute - startTime.minute) +
@@ -59,8 +62,50 @@ class _HomePageState extends State<HomePage> {
     }
    }
 
-   
+   final TaskController = TextEditingController();
 
+   void addTask(String task){
+    habits.add([task, false, 0, 10]);
+   }
+
+   void addTaskPop(BuildContext context){
+    showDialog(context: context, builder: (BuildContext context){
+      return AlertDialog(title: Text("Add Task: ", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),),
+      alignment: Alignment.center,
+      content: Container( height: 120,width: 200,
+        child: Column(
+          children: [
+            TextField(decoration: InputDecoration(
+              hintText: "Enter Task",),
+               controller: TaskController,), 
+            Spacer(),
+            Row(mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                ElevatedButton(onPressed: (){
+                  setState(() {
+                     Navigator.of(context).pop();
+                  });
+                }, 
+                  child: Text("cancel", 
+                  style: TextStyle(color: Colors.white, fontSize: 15,fontWeight: FontWeight.w700),),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.grey[400],
+                    fixedSize: Size(93, 25)),),
+                    SizedBox(width: 10,),
+                ElevatedButton(onPressed: (){
+                  setState(() {
+                    addTask(TaskController.text);
+                    Navigator.of(context).pop();
+                  });
+                }, 
+                child: Text("add", style: TextStyle(color: Colors.white, fontSize: 15,fontWeight: FontWeight.w700),),
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.black,
+                    fixedSize: Size(90, 25)),),
+              ],
+            )],),),);
+    });
+   }
    void settingsTaped(int index){
 
     showDialog(context: context, builder: (context){
@@ -81,25 +126,55 @@ class _HomePageState extends State<HomePage> {
                   });
                 },),
             ),
-            Transform.scale( scale: 0.8,
-              child: ElevatedButton(onPressed: (){
-                setState(() {
-                  habits[index][3] = selected_time.inMinutes;
-                  Navigator.of(context).pop();
-                });
-              }, style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black,
-                    fixedSize: Size(140, 45)),
-                    child: Text("Save", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600),),),
+            Row( mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Transform.scale( scale: 0.8,
+                  child: ElevatedButton(onPressed: (){
+                    setState(() {
+                      habits[index][3] = selected_time.inMinutes;
+                      Navigator.of(context).pop();
+                    });
+                  }, style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black,
+                        fixedSize: Size(140, 45)),
+                        child: Text("Save", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600),),),
+                ),
+                IconButton(onPressed: (){
+                  final List removedHabit = habits[index];
+                  setState(() {
+                    habits.removeAt(index);
+                       ScaffoldMessenger.of(context).showSnackBar(
+                         SnackBar(
+                          content: Text('Task ${habits[index][0]} was deleted', style: TextStyle(fontWeight: FontWeight.w800),),
+                          action: SnackBarAction(
+                            label: 'Undo' ,
+                            textColor: Colors.white,
+    
+                            onPressed: (){
+                              setState(() {
+                                habits.insert(index, removedHabit);
+                              });
+                            },),
+                            
+                            duration: Duration(seconds: 5),
+                            backgroundColor: Colors.grey,
+                            behavior: SnackBarBehavior.floating,
+                             ),);
+                              Navigator.of(context).pop();
+                    
+                  });
+                }, 
+                icon: Icon(Icons.delete_forever, color: Colors.red, size: 38,))
+              ],
             )
 
           ],),),);
     });
 
+      progress = 1 / habits.length * 100;
+    
+
    }
-
-
-
   @override
 
   Widget build(BuildContext context) {
@@ -177,6 +252,7 @@ class _HomePageState extends State<HomePage> {
                   padding: const EdgeInsets.only(left: 15, top: 7),
                   child: Text("keep going!"),
                 )),
+                
               Stack(
           alignment: Alignment.center,
           children: [
@@ -201,8 +277,8 @@ class _HomePageState extends State<HomePage> {
             padding: const EdgeInsets.only(top: 1),
             child: Stack(
               children:[SizedBox( height: 507,
-                child: ListView.builder( itemCount: 4,itemBuilder: (context, index){
-                  return  CardsHabits(onTap: (){TaskStarted(index);}, settings: (){settingsTaped(index);},
+                child: ListView.builder( itemCount: habits.length,itemBuilder: (context, index){
+                  return  CardsHabits(onTap: (){TaskStarted(index);}, settings:(){settingsTaped(index);},
                    timeSpent: habits[index][2], 
                    timeGoal: habits[index][3], 
                    habitStarted: habits[index][1], 
@@ -210,70 +286,23 @@ class _HomePageState extends State<HomePage> {
                    );
                 }),
               ),
+
               Padding(
              padding: const EdgeInsets.only(top:470 ,right: 26),
              child: Container(alignment: Alignment.bottomRight,
                child: Transform.scale( scale: 1.6,
-                 child: ElevatedButton(onPressed: (){}, child: Text("+", style: TextStyle(color: Colors.white, fontSize: 20),),
+                 child: ElevatedButton(child: Text("+", style: TextStyle(color: Colors.white, fontSize: 20),),
                   style: ElevatedButton.styleFrom(
                             backgroundColor: color,
                             shape: CircleBorder()
-                        ),),
+                        ),onPressed: (){
+                          addTaskPop(context);
+                        },),
                ),
              ),
            )
             ]),
           )
-      
-         
-      
-          //  Padding(
-          //    padding: const EdgeInsets.only(top: 35, left: 12, right: 12),
-          //    child: Container(
-          //     padding: EdgeInsets.all(15),
-          //     child: Row(children: [
-          //       Stack( alignment: Alignment.center,
-          //         children: [ CircularPercentIndicator(
-          //           radius: 25,
-          //           percent: 0.6,
-          //           progressColor: color,
-          //         ),
-          //         Icon(Icons.play_arrow, color: Colors.black,)]
-          //       ),
-          //       SizedBox(width: 12,),
-          //       Column( 
-          //         children: [
-          //           Text("Task", style: TextStyle(fontSize: 23, fontWeight: FontWeight.w400),),
-          //           Text("2:00 / 10 = 20%")
-          //         ],
-          //       ),
-          //       Spacer(),
-          //       Icon(Icons.check_box, size: task_icon_size, color: color,),
-          //       SizedBox(width: 10,),
-          //       Icon(Icons.settings, size: task_icon_size, color: Colors.black,),
-          //     ],),
-          //     height: 90,
-          //     width: 400,
-          //     decoration: BoxDecoration(
-          //       borderRadius: BorderRadius.circular(14),
-          //       border: Border.all(
-          //       color: Colors.black,
-          //       width: 3,
-          // ),), ),
-          //  ),
-           
-          // , Padding(
-          //    padding: const EdgeInsets.only(right: 20),
-          //    child: Container(alignment: Alignment.bottomRight,
-          //      child: Transform.scale( scale: 1.6,
-          //        child: ElevatedButton(onPressed: (){}, child: Text("+", style: TextStyle(color: Colors.white, fontSize: 20),),
-          //         style: ElevatedButton.styleFrom(
-          //                   backgroundColor: color,
-          //                   shape: CircleBorder()
-          //               ),),
-          //      ),
-          //    ),
-          //  )
               
                ]
             )),
@@ -282,31 +311,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
-
-
-
-//  Widget buildSection(String title, double progress) {
-//     return Container(
-//       padding: EdgeInsets.only(top: 16.0, bottom: 16, right: 20, left: 220),
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           Container(
-//             child: Text(
-//               title,
-//               style:TextStyle(fontWeight: FontWeight.bold),),
-//           ),
-//           LinearProgressIndicator(
-//             value: progress,
-//             minHeight: 14,
-//             borderRadius: BorderRadius.circular(50),
-//              // Adjust height as needed
-//           ),
-//           Container(color: Colors.deepPurpleAccent,height: 100,width: 150,)
-//           // Add checkboxes or other content here
-          
-//         ],
-//       ),
-//     );
-//   }
