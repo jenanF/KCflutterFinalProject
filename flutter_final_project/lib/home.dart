@@ -39,6 +39,18 @@ class _HomePageState extends State<HomePage> {
         name: "Swimming",
         timeGoal: 10,
         timeSpent: 0,
+        isPaused: false),
+    Habit(
+        isDone: false,
+        name: "Reading",
+        timeGoal: 10,
+        timeSpent: 0,
+        isPaused: false),
+    Habit(
+        isDone: false,
+        name: "Coding",
+        timeGoal: 10,
+        timeSpent: 0,
         isPaused: false)
   ];
 
