@@ -390,7 +390,7 @@ class _HomePageState extends State<HomePage> {
                     minHeight: 26,
                     color: color,
                     borderRadius: BorderRadius.circular(30),
-                    backgroundColor: Colors.grey[300],
+                    backgroundColor: Colors.grey[500],
                   ),
                 ),
                 Text(

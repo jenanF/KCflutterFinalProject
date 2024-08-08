@@ -118,7 +118,9 @@ class _HealthScreen extends State<HealthScreen> {
                           Text(
                             "  Water Tracker",
                             style: TextStyle(
-                                fontSize: 22, fontWeight: FontWeight.bold),
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.pink),
                           ),
                           Spacer(),
                           Padding(
@@ -143,6 +145,7 @@ class _HealthScreen extends State<HealthScreen> {
                                 padding: const EdgeInsets.all(20),
                                 child: LinearProgressIndicator(
                                   minHeight: 18,
+                                  backgroundColor: Colors.grey[500],
                                   borderRadius: BorderRadius.circular(30),
                                   value: (counter / isDropful.length)
                                       .clamp(0.0, 1.0),
