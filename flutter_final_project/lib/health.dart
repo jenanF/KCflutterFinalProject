@@ -46,7 +46,6 @@ class _HealthScreen extends State<HealthScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Color border_color = Colors.indigoAccent;
     double card_height = 200;
     double card_width = 350;
 
