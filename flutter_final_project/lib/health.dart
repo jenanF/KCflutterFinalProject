@@ -4,6 +4,7 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_final_project/bmi_calc.dart';
 import 'package:flutter_final_project/models/cards_health.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
@@ -37,17 +38,26 @@ class _HealthScreen extends State<HealthScreen> {
   ];
 
   double counter = 0;
+  int cupCount = 0;
 
   void dropCheck(index) {
     isDropful[index] = !isDropful[index];
     drop[index] = isDropful[index] ? "dropful" : "drop";
-    counter += 0.1;
+
+    if (isDropful[index] == true) {
+      counter++;
+      cupCount++;
+    } else {
+      counter--;
+      cupCount--;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     double card_height = 200;
     double card_width = 350;
+    double test2 = (counter / isDropful.length);
 
     return Scaffold(
       appBar: AppBar(
@@ -110,6 +120,11 @@ class _HealthScreen extends State<HealthScreen> {
                             style: TextStyle(
                                 fontSize: 22, fontWeight: FontWeight.bold),
                           ),
+                          Spacer(),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 25),
+                            child: Text("Cups  $cupCount / 8"),
+                          )
                         ],
                       ),
                     ),
@@ -129,12 +144,13 @@ class _HealthScreen extends State<HealthScreen> {
                                 child: LinearProgressIndicator(
                                   minHeight: 18,
                                   borderRadius: BorderRadius.circular(30),
-                                  value: counter.clamp(0.0, 1.0),
+                                  value: (counter / isDropful.length)
+                                      .clamp(0.0, 1.0),
                                   color: Colors.lightBlue,
                                 ),
                               ),
                               Text(
-                                "${(counter * 100).toStringAsFixed(0)}%"
+                                "${(test2 * 100).toStringAsFixed(0)}%"
                                 //'${(test * 100).toStringAsFixed(0)}%'
                                 ,
                                 style: TextStyle(
@@ -355,46 +371,54 @@ class _HealthScreen extends State<HealthScreen> {
                       width: 5,
                     ),
 
-                    Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(13),
-                          border: Border.all(color: Colors.black, width: 3)),
-                      height: 200,
-                      width: 170,
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return BmiCaculator();
+                        }));
+                      },
                       child: Container(
-                        alignment: Alignment.topLeft,
-                        padding: EdgeInsets.only(
-                            left: 20, bottom: 5, right: 30, top: 10),
-                        child: Column(
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                // Icon(
-                                //   Icons.fitness_center,
-                                //   size: 24,
-                                // ),
-                                Text(
-                                  " BMI \nCalculater",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.pink),
-                                ),
-
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0)
-                                      .copyWith(left: 17),
-                                  child: Image.asset(
-                                    "assets/images/bmi.png",
-                                    height: 100,
-                                    width: 100,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(13),
+                            border: Border.all(color: Colors.black, width: 3)),
+                        height: 200,
+                        width: 170,
+                        child: Container(
+                          alignment: Alignment.topLeft,
+                          padding: EdgeInsets.only(
+                              left: 20, bottom: 5, right: 30, top: 10),
+                          child: Column(
+                            children: [
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  // Icon(
+                                  //   Icons.fitness_center,
+                                  //   size: 24,
+                                  // ),
+                                  Text(
+                                    " BMI \nCalculater",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.pink),
                                   ),
-                                )
-                              ],
-                            ),
-                          ],
+
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0)
+                                        .copyWith(left: 17),
+                                    child: Image.asset(
+                                      "assets/images/bmi.png",
+                                      height: 100,
+                                      width: 100,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
