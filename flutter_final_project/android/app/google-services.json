@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "662632815441",
+    "firebase_url": "https://kcflutterfinalproject-default-rtdb.firebaseio.com",
+    "project_id": "kcflutterfinalproject",
+    "storage_bucket": "kcflutterfinalproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:662632815441:android:eeda0c264490501ea4d170",
+        "android_client_info": {
+          "package_name": "com.example.flutter_final_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxyWjzOYs1IcjkZjks75wGK_qYNAPJcSI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
