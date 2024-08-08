@@ -36,6 +36,14 @@ class _HealthScreen extends State<HealthScreen> {
     false,
   ];
 
+  double counter = 0;
+
+  void dropCheck(index) {
+    isDropful[index] = !isDropful[index];
+    drop[index] = isDropful[index] ? "dropful" : "drop";
+    counter += 0.1;
+  }
+
   @override
   Widget build(BuildContext context) {
     Color border_color = Colors.indigoAccent;
@@ -122,12 +130,12 @@ class _HealthScreen extends State<HealthScreen> {
                                 child: LinearProgressIndicator(
                                   minHeight: 18,
                                   borderRadius: BorderRadius.circular(30),
-                                  value: 0.65,
+                                  value: counter.clamp(0.0, 1.0),
                                   color: Colors.lightBlue,
                                 ),
                               ),
                               Text(
-                                "65%"
+                                "${(counter * 100).toStringAsFixed(0)}%"
                                 //'${(test * 100).toStringAsFixed(0)}%'
                                 ,
                                 style: TextStyle(
@@ -146,8 +154,7 @@ class _HealthScreen extends State<HealthScreen> {
                               InkWell(
                                 onTap: () {
                                   setState(() {
-                                    isDropful[0] = !isDropful[0];
-                                    drop[0] = isDropful[0] ? "dropful" : "drop";
+                                    dropCheck(0);
 
                                     print(drop);
                                   });
@@ -161,10 +168,7 @@ class _HealthScreen extends State<HealthScreen> {
                               InkWell(
                                 onTap: () {
                                   setState(() {
-                                    isDropful[1] = !isDropful[1];
-                                    drop[1] = isDropful[1] ? "dropful" : "drop";
-
-                                    print(drop);
+                                    dropCheck(1);
                                   });
                                 },
                                 child: Image.asset(
@@ -176,10 +180,7 @@ class _HealthScreen extends State<HealthScreen> {
                               InkWell(
                                 onTap: () {
                                   setState(() {
-                                    isDropful[2] = !isDropful[2];
-                                    drop[2] = isDropful[2] ? "dropful" : "drop";
-
-                                    print(drop);
+                                    dropCheck(2);
                                   });
                                 },
                                 child: Image.asset(
@@ -191,10 +192,7 @@ class _HealthScreen extends State<HealthScreen> {
                               InkWell(
                                 onTap: () {
                                   setState(() {
-                                    isDropful[3] = !isDropful[3];
-                                    drop[3] = isDropful[3] ? "dropful" : "drop";
-
-                                    print(drop);
+                                    dropCheck(3);
                                   });
                                 },
                                 child: Image.asset(
@@ -214,10 +212,7 @@ class _HealthScreen extends State<HealthScreen> {
                               InkWell(
                                 onTap: () {
                                   setState(() {
-                                    isDropful[4] = !isDropful[4];
-                                    drop[4] = isDropful[4] ? "dropful" : "drop";
-
-                                    print(drop);
+                                    dropCheck(4);
                                   });
                                 },
                                 child: Image.asset(
@@ -229,10 +224,7 @@ class _HealthScreen extends State<HealthScreen> {
                               InkWell(
                                 onTap: () {
                                   setState(() {
-                                    isDropful[5] = !isDropful[5];
-                                    drop[5] = isDropful[5] ? "dropful" : "drop";
-
-                                    print(drop);
+                                    dropCheck(5);
                                   });
                                 },
                                 child: Image.asset(
@@ -244,10 +236,7 @@ class _HealthScreen extends State<HealthScreen> {
                               InkWell(
                                 onTap: () {
                                   setState(() {
-                                    isDropful[6] = !isDropful[6];
-                                    drop[6] = isDropful[6] ? "dropful" : "drop";
-
-                                    print(drop);
+                                    dropCheck(6);
                                   });
                                 },
                                 child: Image.asset(
@@ -259,10 +248,7 @@ class _HealthScreen extends State<HealthScreen> {
                               InkWell(
                                 onTap: () {
                                   setState(() {
-                                    isDropful[7] = !isDropful[7];
-                                    drop[7] = isDropful[7] ? "dropful" : "drop";
-
-                                    print(drop);
+                                    dropCheck(7);
                                   });
                                 },
                                 child: Image.asset(
