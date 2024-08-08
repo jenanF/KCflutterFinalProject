@@ -1,6 +1,9 @@
 // ignore_for_file: unused_import
 
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_final_project/models/cards_health.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
@@ -12,6 +15,27 @@ class HealthScreen extends StatefulWidget {
 }
 
 class _HealthScreen extends State<HealthScreen> {
+  List drop = [
+    "drop",
+    "drop",
+    "drop",
+    "drop",
+    "drop",
+    "drop",
+    "drop",
+    "drop",
+  ];
+  List isDropful = [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ];
+
   @override
   Widget build(BuildContext context) {
     Color border_color = Colors.indigoAccent;
@@ -49,8 +73,9 @@ class _HealthScreen extends State<HealthScreen> {
             Text("Health",
                 style: TextStyle(
                     color: Colors.pink,
-                    fontSize: 30,
+                    fontSize: 35,
                     fontWeight: FontWeight.w800)),
+            Text("Stronger than yesterday"),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
@@ -69,8 +94,9 @@ class _HealthScreen extends State<HealthScreen> {
                       child: Row(
                         children: [
                           Icon(
-                            Icons.directions_walk_outlined,
+                            Icons.water_drop,
                             size: 30,
+                            color: Colors.lightBlue,
                           ),
                           Text(
                             "  Water Tracker",
@@ -83,16 +109,179 @@ class _HealthScreen extends State<HealthScreen> {
                     Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(13),
-                          border: Border.all(color: border_color, width: 2)),
+                          border: Border.all(color: Colors.black, width: 2)),
                       height: card_height,
                       width: card_width,
+                      child: Column(
+                        children: [
+                          Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(20),
+                                child: LinearProgressIndicator(
+                                  minHeight: 18,
+                                  borderRadius: BorderRadius.circular(30),
+                                  value: 0.65,
+                                  color: Colors.lightBlue,
+                                ),
+                              ),
+                              Text(
+                                "65%"
+                                //'${(test * 100).toStringAsFixed(0)}%'
+                                ,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    isDropful[0] = !isDropful[0];
+                                    drop[0] = isDropful[0] ? "dropful" : "drop";
+
+                                    print(drop);
+                                  });
+                                },
+                                child: Image.asset(
+                                  "assets/images/${drop[0]}.png",
+                                  height: 40,
+                                  width: 40,
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    isDropful[1] = !isDropful[1];
+                                    drop[1] = isDropful[1] ? "dropful" : "drop";
+
+                                    print(drop);
+                                  });
+                                },
+                                child: Image.asset(
+                                  "assets/images/${drop[1]}.png",
+                                  height: 40,
+                                  width: 40,
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    isDropful[2] = !isDropful[2];
+                                    drop[2] = isDropful[2] ? "dropful" : "drop";
+
+                                    print(drop);
+                                  });
+                                },
+                                child: Image.asset(
+                                  "assets/images/${drop[2]}.png",
+                                  height: 40,
+                                  width: 40,
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    isDropful[3] = !isDropful[3];
+                                    drop[3] = isDropful[3] ? "dropful" : "drop";
+
+                                    print(drop);
+                                  });
+                                },
+                                child: Image.asset(
+                                  "assets/images/${drop[3]}.png",
+                                  height: 40,
+                                  width: 40,
+                                ),
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            height: 12,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    isDropful[4] = !isDropful[4];
+                                    drop[4] = isDropful[4] ? "dropful" : "drop";
+
+                                    print(drop);
+                                  });
+                                },
+                                child: Image.asset(
+                                  "assets/images/${drop[4]}.png",
+                                  height: 40,
+                                  width: 40,
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    isDropful[5] = !isDropful[5];
+                                    drop[5] = isDropful[5] ? "dropful" : "drop";
+
+                                    print(drop);
+                                  });
+                                },
+                                child: Image.asset(
+                                  "assets/images/${drop[5]}.png",
+                                  height: 40,
+                                  width: 40,
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    isDropful[6] = !isDropful[6];
+                                    drop[6] = isDropful[6] ? "dropful" : "drop";
+
+                                    print(drop);
+                                  });
+                                },
+                                child: Image.asset(
+                                  "assets/images/${drop[6]}.png",
+                                  height: 40,
+                                  width: 40,
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    isDropful[7] = !isDropful[7];
+                                    drop[7] = isDropful[7] ? "dropful" : "drop";
+
+                                    print(drop);
+                                  });
+                                },
+                                child: Image.asset(
+                                  "assets/images/${drop[7]}.png",
+                                  height: 40,
+                                  width: 40,
+                                ),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
                     )
                   ],
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20).copyWith(top: 10),
               child: Container(
                 child: Row(
                   children: [
@@ -117,9 +306,7 @@ class _HealthScreen extends State<HealthScreen> {
                     Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(13),
-                          border: Border.all(
-                              color: const Color.fromARGB(255, 244, 75, 131),
-                              width: 3)),
+                          border: Border.all(color: Colors.black, width: 3)),
                       height: 200,
                       width: 175,
                       child: Container(
@@ -134,12 +321,14 @@ class _HealthScreen extends State<HealthScreen> {
                                 Icon(
                                   Icons.directions_walk_outlined,
                                   size: 30,
+                                  color: Colors.black,
                                 ),
                                 Text(
                                   " Steps",
                                   style: TextStyle(
                                       fontSize: 22,
-                                      fontWeight: FontWeight.bold),
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.pink),
                                 ),
                               ],
                             ),
@@ -184,9 +373,7 @@ class _HealthScreen extends State<HealthScreen> {
                     Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(13),
-                          border: Border.all(
-                              color: const Color.fromARGB(255, 244, 75, 131),
-                              width: 3)),
+                          border: Border.all(color: Colors.black, width: 3)),
                       height: 200,
                       width: 170,
                       child: Container(
@@ -207,10 +394,19 @@ class _HealthScreen extends State<HealthScreen> {
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontSize: 22,
-                                      fontWeight: FontWeight.bold),
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.pink),
                                 ),
 
-                                Image.asset("assets/images/bmi.png")
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0)
+                                      .copyWith(left: 17),
+                                  child: Image.asset(
+                                    "assets/images/bmi.png",
+                                    height: 100,
+                                    width: 100,
+                                  ),
+                                )
                               ],
                             ),
                           ],
