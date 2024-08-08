@@ -20,13 +20,13 @@ class _BmiCaculatorState extends State<BmiCaculator> {
     result = weight / (height * height);
     if (result < 18) {
       bmi_color = const Color.fromARGB(255, 183, 165, 1);
-      bmi = "UderWeight";
+      bmi = "UderWeight!";
     } else if (result >= 19 && result <= 25) {
       bmi_color = Colors.green;
       bmi = "Healthy Weight";
     } else {
       bmi_color = Colors.red;
-      bmi = "OverWeight";
+      bmi = "OverWeight!";
     }
   }
 
@@ -138,7 +138,7 @@ class _BmiCaculatorState extends State<BmiCaculator> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(30).copyWith(left: 40),
+            padding: const EdgeInsets.all(30).copyWith(left: 40, bottom: 20),
             child: Text(
               "Your BMI : \n ${result.toStringAsFixed(2)}",
               textAlign: TextAlign.center,
@@ -149,12 +149,12 @@ class _BmiCaculatorState extends State<BmiCaculator> {
             ),
           ),
           Text(
-            "$bmi",
+            "  $bmi",
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 25,
               color: bmi_color,
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.w700,
             ),
           ),
           Spacer()
