@@ -22,7 +22,7 @@ class _BmiCaculatorState extends State<BmiCaculator> {
     double height = double.parse(HeightController.text) / 100;
     double weight = double.parse(weightController.text);
     result = weight / (height * height);
-    if (result < 18) {
+    if (result <= 18) {
       bmi_color = const Color.fromARGB(255, 183, 165, 1);
       bmi = "UderWeight!";
       url = "https://www.healthline.com/nutrition/how-to-gain-weight";

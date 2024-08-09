@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
+import 'dart:html';
 
 class HelpScreen extends StatefulWidget {
   const HelpScreen({super.key});
@@ -11,6 +14,14 @@ class HelpScreen extends StatefulWidget {
 }
 
 class _HelpScreenState extends State<HelpScreen> {
+  Future<void> perm() async {
+    final permissions = await window.navigator
+        .getUserMedia(
+          audio: true,
+        )
+        .then((value) => true);
+  }
+
   final speechToText = SpeechToText();
   String lastWords = "";
 
@@ -27,6 +38,7 @@ class _HelpScreenState extends State<HelpScreen> {
 
   Future<void> startListening() async {
     await speechToText.listen(onResult: onSpeechResult);
+
     setState(() {});
   }
 
@@ -38,6 +50,7 @@ class _HelpScreenState extends State<HelpScreen> {
   void onSpeechResult(SpeechRecognitionResult result) {
     setState(() {
       lastWords = result.recognizedWords;
+      print(lastWords);
     });
   }
 

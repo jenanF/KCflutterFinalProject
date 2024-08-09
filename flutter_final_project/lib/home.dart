@@ -66,7 +66,9 @@ class _HomePageState extends State<HomePage> {
     if (habitsList[index].isPaused == true) {
       Timer.periodic(Duration(seconds: 1), (timer) {
         setState(() {
-          if (habitsList[index].isPaused == false) {
+          if (habitsList[index].isPaused == false
+              // || habitsList[index].timeSpent == habitsList[index].timeGoal
+              ) {
             timer.cancel();
           }
           // else if(habits[index][2].minutes == habits[index][3]){
@@ -74,11 +76,12 @@ class _HomePageState extends State<HomePage> {
           //   timer.cancel();
           // }
           var currentTime = DateTime.now();
-          habitsList[index].timeSpent = Etime +
-              currentTime.second -
-              startTime.second +
-              60 * (currentTime.minute - startTime.minute) +
-              60 * 60 * (currentTime.hour - startTime.hour);
+          habitsList[index].timeSpent =
+              Etime + //time spent already before paused
+                  currentTime.second -
+                  startTime.second +
+                  60 * (currentTime.minute - startTime.minute) +
+                  60 * 60 * (currentTime.hour - startTime.hour);
         });
       });
     }

@@ -15,6 +15,7 @@ dependencies:
   text_to_speech: ^0.2.3
   speech_to_text: ^6.6.2
   url_launcher: ^6.3.0
+  syncfusion_flutter_calendar: ^26.2.8
 
 dev_dependencies:
   flutter_test:
