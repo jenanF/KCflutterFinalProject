@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -5,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'dart:html';
+import 'package:flutter_tts/flutter_tts.dart';
+import 'package:flutter_final_project/ai_services.dart';
 
 class HelpScreen extends StatefulWidget {
   const HelpScreen({super.key});
@@ -23,12 +27,20 @@ class _HelpScreenState extends State<HelpScreen> {
   }
 
   final speechToText = SpeechToText();
+  final textToSpeech = FlutterTts();
   String lastWords = "";
+  final AIServices aiServices = AIServices();
 
   @override
   void initState() {
     super.initState();
     initSpeechToText();
+    initTextToSpeech();
+  }
+
+  Future<void> initTextToSpeech() async {
+    await textToSpeech.setSharedInstance(true);
+    setState(() {});
   }
 
   Future<void> initSpeechToText() async {
@@ -52,6 +64,17 @@ class _HelpScreenState extends State<HelpScreen> {
       lastWords = result.recognizedWords;
       print(lastWords);
     });
+  }
+
+  Future<void> systemSpeak(String content) async {
+    await textToSpeech.speak(content);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    speechToText.stop();
+    textToSpeech.stop();
   }
 
   @override
@@ -124,6 +147,8 @@ class _HelpScreenState extends State<HelpScreen> {
                               speechToText.isNotListening) {
                             await startListening();
                           } else if (speechToText.isListening) {
+                            final speech = await aiServices.chatAI(lastWords);
+                            await systemSpeak(speech);
                             await stopListening();
                           } else {
                             initSpeechToText();
