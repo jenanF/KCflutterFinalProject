@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:url_launcher/link.dart';
 
 class BmiCaculator extends StatefulWidget {
   const BmiCaculator({super.key});
@@ -13,6 +15,8 @@ class _BmiCaculatorState extends State<BmiCaculator> {
   double result = 0;
   Color bmi_color = Colors.black;
   String bmi = "";
+  String url = "";
+  Color color = Color.fromARGB(255, 231, 230, 230);
 
   void calculateBMI() {
     double height = double.parse(HeightController.text) / 100;
@@ -21,12 +25,19 @@ class _BmiCaculatorState extends State<BmiCaculator> {
     if (result < 18) {
       bmi_color = const Color.fromARGB(255, 183, 165, 1);
       bmi = "UderWeight!";
+      url = "https://www.healthline.com/nutrition/how-to-gain-weight";
+      color = const Color.fromARGB(255, 203, 184, 11);
     } else if (result >= 19 && result <= 25) {
       bmi_color = Colors.green;
       bmi = "Healthy Weight";
+      url =
+          "https://reverehealth.com/live-better/tips-to-maintain-a-healthy-weight/";
+      color = Colors.green;
     } else {
       bmi_color = Colors.red;
       bmi = "OverWeight!";
+      url = "https://www.healthline.com/health/how-to-prevent-obesity";
+      color = Colors.red;
     }
   }
 
@@ -157,6 +168,28 @@ class _BmiCaculatorState extends State<BmiCaculator> {
               fontWeight: FontWeight.w700,
             ),
           ),
+          Link(
+              uri: Uri.parse(
+                  "https://www.healthline.com/nutrition/how-to-gain-weight"),
+              target: LinkTarget.blank,
+              builder: (context, followLink) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0).copyWith(left: 20),
+                  child: Transform.scale(
+                    scale: 1.2,
+                    child: ElevatedButton(
+                      onPressed: followLink,
+                      child: const Text(
+                        "Suggestions",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: color,
+                      ),
+                    ),
+                  ),
+                );
+              }),
           Spacer()
         ])));
   }
