@@ -169,8 +169,7 @@ class _BmiCaculatorState extends State<BmiCaculator> {
             ),
           ),
           Link(
-              uri: Uri.parse(
-                  "https://www.healthline.com/nutrition/how-to-gain-weight"),
+              uri: Uri.parse(url),
               target: LinkTarget.blank,
               builder: (context, followLink) {
                 return Padding(
